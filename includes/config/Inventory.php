@@ -23,6 +23,7 @@
                     'message' => "Successfully created inventory for {$InventoryMeta['product_sku']}"
                 ];
             } catch (Exception $E) {
+                error_log("Inventory insert error: " . $E->getMessage());
                 return [
                     "success" => false,
                     "message" => $E->getMessage()
@@ -64,6 +65,30 @@
             }
         }
 
+        public function reduceStock($StockData) {
+            try {
+                $Now = date('Y-m-d H:i:s');
+                $Sql = "UPDATE inventory SET current_stock = current_stock - ?, updated_at = ? WHERE inventory_id = ?";
+                $Stmt = $this->Conn->prepare($Sql);
+                if(!$Stmt) {
+                    throw new Exception("Failed to execute query: ". $this->Conn->error);
+                }
+                $Stmt->bind_param("isi", $StockData['quantity'], $Now, $StockData['inventory_id']);
+                $Stmt->execute();
+                $Stmt->close();
+
+                return [
+                    'success' => true,
+                    'message' => "Stock updated successfully."
+                ];
+            } catch (Exception $E) {
+                error_log("Error in updating stock: {$E->getMessage()}");
+                return [
+                    'success' => false,
+                    'message' => $E->getMessage()
+                ];
+            }
+        } 
         public function fetchInventory(?int $Limit = null, int $Offset = 0): array {
             $Sql = "SELECT * FROM product_inventory_view ORDER BY current_stock DESC, product_name ASC";
             if ($Limit !== null) {
