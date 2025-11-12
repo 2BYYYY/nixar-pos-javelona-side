@@ -1,3 +1,9 @@
+/*
+* AUTHOR/S:
+* - John Roland Octavio
+* - Jul Leo Javellana
+* */
+
 const productContainers = document.getElementById('product-containers');
 const searchBar = document.getElementById('search-bar');
 const filterTiles = document.querySelectorAll('.filter-tile');
