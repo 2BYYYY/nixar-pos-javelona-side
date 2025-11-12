@@ -1,3 +1,4 @@
+<!-- AUTHORS: Raean Chrissean R. Tamayo, -->
 <?php
 // Configuration
 $mode = $mode ?? 'add';

@@ -1,3 +1,4 @@
+// AUTHORS: Raean Chrissean R. Tamayo,
 /* ================= INVENTORY REFERENCES AND VARIABLES ================= */
 const searchBox = document.getElementById('search-input');
 const inventoryTbl = document.getElementById('container-inventory-data');

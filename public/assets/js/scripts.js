@@ -1,3 +1,4 @@
+<!-- AUTHORS: Raean Chrissean R. Tamayo, -->
 const toggleMenu = () => {
     const menu = document.querySelector('.mobile-nav-links');
     menu.classList.toggle('d-flex');
