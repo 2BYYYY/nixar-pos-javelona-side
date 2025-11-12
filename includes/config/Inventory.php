@@ -160,6 +160,9 @@
             return (int)$Row['total'];
         }
 
+/* 
+    Author: Ignatius Warren Benjamin D. Javelona,
+*/
         public function salesReportMetrics(){
             $Sql = "SELECT * FROM sales_report_view";
             $Result = $this->Conn->query($Sql);
@@ -213,7 +216,7 @@
             $Sql = "SELECT * FROM most_sold_item_by_qty_view LIMIT 1";
             $Result = $this->Conn->query($Sql);
             $Row = $Result->fetch_assoc();
-            return (string)$Row['product_name'];
+            return $Row;
         }
 
         public function inventoryMetricsStock(){

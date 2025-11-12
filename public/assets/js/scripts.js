@@ -1,4 +1,9 @@
-<!-- AUTHORS: Raean Chrissean R. Tamayo, -->
+/*
+* AUTHOR/S:
+* - Raean Chrissean Tamayo
+* - Jul Leo Javellana
+* */
+
 const toggleMenu = () => {
     const menu = document.querySelector('.mobile-nav-links');
     menu.classList.toggle('d-flex');
