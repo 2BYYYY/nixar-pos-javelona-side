@@ -10,17 +10,23 @@
 
 <div class="container-fluid p-0 m-0 h-100 px-4 py-3  d-flex flex-column overflow-x-hidden">
     <?php include_once '../includes/components/nav.php'; ?>
-        <div class="report-header d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
-                <select id="reportType" class="text-input me-3" style="width: 200px;">
-            <option value="sales">Sales Report</option>
-            <option value="inventory">Inventory Report</option>
-        </select>
-                <div class="d-flex align-items-center gap-2">
-                    <input type="date" id="startDate" class="text-input" style="width: 150px;">
-                    <span>to</span>
-                    <input type="date" id="endDate" class="text-input" style="width: 150px;">
-                    <button class="btn ms-2">Generate Report</button>
-                </div>
+    <div class="report-header d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
+        <label for="reportType" class="d-inline-flex flex-column gap-1 fw-semibold">
+            Report Type
+            <select id="reportType" class="text-input me-3" style="width: 200px;">
+                <option value="sales">Sales Report</option>
+                <option value="inventory">Inventory Report</option>
+            </select>
+        </label>
+        <div class="d-flex flex-column gap-1">
+            <p class="fw-semibold">Transaction Record Range</p>
+            <div class="d-flex align-items-center gap-2">
+                <input type="date" id="startDate" class="text-input" style="width: 150px;">
+                <span>to</span>
+                <input type="date" id="endDate" class="text-input" style="width: 150px;">
+                <button class="btn ms-2">Generate Report</button>
+            </div>
+        </div>
     </div>
 
     <!-- Sales Report -->

@@ -1,5 +1,9 @@
 <?php 
-
+    /**
+     * Author: John Roland L. Octavio
+     * The SessionManager class is a centralized utility that handles all user session operations for the NIXAR POS web application.
+     * It ensures controlled access, user authentication, and session-based redirection between the login page and protected pages.
+     */
     class SessionManager {
         private static ?SessionManager $Instance = null;
 
@@ -51,8 +55,23 @@
         public static function checkSession() {
             self::getInstance();
 
-            if (!SessionManager::has('logged_in') || SessionManager::get('logged_in') !== true) {
-                header("Location: /nixar-pos/public/index.php");
+            $CurrentPage = basename($_SERVER['PHP_SELF']);
+            $LoginPage = 'index.php';
+            $IsLoggedIn = self::has('logged_in') && self::get('logged_in') === true;
+            $Role = self::get('role') ?? null;
+
+            // Redirect to login page since there are no active users or sessions yet
+            if (!$IsLoggedIn || !$Role) {
+                if ($CurrentPage !== $LoginPage) {
+                    header("Location: /nixar-pos/public/index.php");
+                    exit;
+                }
+            }
+
+            // Redirect to default pages according to role if there is a session or an active user
+            $PageToDirect = ($Role === 'admin') ? 'reports.php' : 'transaction.php';
+            if ($IsLoggedIn && $CurrentPage === $LoginPage) {
+                header("Location: /nixar-pos/public/{$PageToDirect}");
                 exit;
             }
         }
