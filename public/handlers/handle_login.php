@@ -28,17 +28,19 @@
                     ];
                     SessionManager::createUser($UserInfo);
                     
+                    $PageToDirect = '';
                     switch($User['role']) {
                         case 'admin': 
-                            header('Location: ../inventory.php');
+                            $PageToDirect = 'reports.php';
                             break;
                         case 'cashier':
-                            header('Location: ../transaction.php');
+                            $PageToDirect = 'transaction.php';
                             break;
                         default:
-                            header('Location: ../index.php');
+                            $PageToDirect = 'index.php';
                             break;
                     }
+                    header("Location: ../{$PageToDirect}");
                     exit;  
                 }
                 echo "Invalid Login!";
