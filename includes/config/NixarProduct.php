@@ -227,6 +227,45 @@
             }
             return $Result->fetch_all(MYSQLI_ASSOC);
         }
+
+        public function fetchCompatible(string $ProductSku) {
+            try {
+                $Sql = "SELECT 
+                    cm.make, 
+                    cm.model, 
+                    cm.year, 
+                    cm.type, 
+                    np.product_name, 
+                    np.nixar_product_sku 
+                FROM car_models cm 
+                JOIN product_compatibility pc 
+                    ON pc.car_model_id = cm.car_model_id 
+                JOIN nixar_products np 
+                    ON pc.nixar_product_sku = np.nixar_product_sku 
+                WHERE np.nixar_product_sku = ?";
+                
+                $Stmt = $this->Conn->prepare($Sql);
+                if (!$Stmt) {
+                    throw new Exception('Failed to prepare SELECT statement: ' . $this->Conn->error);
+                }
+                $Stmt->bind_param("s", $ProductSku);
+                $Stmt->execute();
+
+                $Result = $Stmt->get_result();
+                $Rows = $Result->fetch_all(MYSQLI_ASSOC);
+                $Stmt->close();
+
+                return [
+                    'success' => true,
+                    'rows' => $Rows
+                ];
+            } catch (Exception $E) {
+                return [
+                    'success' => false,
+                    'message' => $E->getMessage()
+                ];
+            }
+        }
     }
 
 ?>

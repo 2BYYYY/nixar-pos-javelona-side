@@ -17,6 +17,9 @@
       <li class="nav-link py-2 px-4 rounded-pill">
         <a href="../public/reports.php">Reports</a>
       </li>
+      <li class="nav-link py-2 px-4 rounded-pill">
+        <a href="../public/supplier.php">Suppliers</a>
+      </li>
     <?php endif; ?>
   </ul>
     <a class="logout-btn d-none d-md-block" href="../public/handlers/handle_logout.php">
