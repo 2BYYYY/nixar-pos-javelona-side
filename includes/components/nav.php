@@ -1,3 +1,7 @@
+<!--
+    AUTHOR/s:
+    - Jul Leo Javellana
+-->
 <nav class="navbar w-100 d-flex justify-content-between align-items-center rounded-3 px-4">
     <img
             src="assets/svg/nixar-logo-white.svg"

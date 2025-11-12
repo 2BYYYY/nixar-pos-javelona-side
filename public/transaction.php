@@ -1,3 +1,8 @@
+<!--
+    AUTHOR/S:
+    - Jul Leo Javellana
+-->
+
 <?php
     include_once __DIR__ . '/../includes/config/_init.php';  
 

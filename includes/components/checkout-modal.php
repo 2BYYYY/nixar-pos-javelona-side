@@ -1,3 +1,8 @@
+<!--
+    AUTHOR/s:
+    - Jul Leo Javellana
+-->
+
 <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
