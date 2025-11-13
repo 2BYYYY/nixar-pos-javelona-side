@@ -178,7 +178,7 @@
                     <th>Total</th>
                     </tr>
                     </thead>
-                    <tbody id="inventory-table-sock">
+                    <tbody id="inventory-table-stock">
                     <!-- ===== HOST ALL LOW STOCK ITEMS FETCHED FROM JS ===== -->
                     </tbody>
                 </table>

@@ -49,7 +49,7 @@ const categoryTable = document.getElementById('sales-table-category');
 const timeTable = document.getElementById('sales-table-time');
 const soldTable = document.getElementById('inventory-table-sold');
 const sellingTable = document.getElementById('inventory-table-selling');
-const stockTable = document.getElementById('inventory-table-sock');
+const stockTable = document.getElementById('inventory-table-stock');
 
 const list_metric_config = [
   { key: 'sales_limetric_time', 
@@ -156,7 +156,7 @@ const sales_inventory_list_metrics = async () => {
         table.innerHTML = 
         `
           <tr>
-            <td style="text-align:center;"> All products are above minimum </td>
+            <td colspan="${value.length}" class="text-center"> All products are above minimum threshold. </td>
           </tr>
         `;
       } else {
