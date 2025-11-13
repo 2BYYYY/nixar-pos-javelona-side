@@ -77,6 +77,35 @@ class Supplier {
         return $Id;
     }
 
+    public function updateSupplierInfo($SupplierInfo) {
+        try {
+            $Sql = "UPDATE suppliers SET supplier_name = ?, contact_no = ? WHERE supplier_id = ?";
+            $Stmt = $this->Conn->prepare($Sql);
+            if (!$Stmt) {
+                throw new Exception('Failed to prepare UPDATE statement: ' . $this->Conn->error);
+            }
+            $Stmt->bind_param(
+                "sii",
+                $SupplierInfo['supplier_name'],
+                $SupplierInfo['contact_no'],
+                $SupplierInfo['supplier_id']
+            );
+            $Stmt->execute();
+            $Stmt->close();
+
+            return [
+                'success' => true,
+                'message' => "Successfully updated supplier information."
+            ];
+        } catch (Exception $E) {
+            error_log("Error: " . $E->getMessage());
+            error_log("Trace: " . $E->getTraceAsString());
+            return [
+                'success' => false,
+                'message' => $E->getMessage()
+            ];
+        }
+    }
     public function updateProductSupplier($SupplierInfo) {
         try {
             $Sql = "UPDATE product_suppliers SET supplier_id = ?, base_price = ? WHERE product_supplier_id = ?";
@@ -128,6 +157,32 @@ class Supplier {
               'message' => $E->getMessage()
           ];
       }
+    }
+
+    public function removeProduct($ProductSupplierId) {
+        try {
+            $Sql = "DELETE FROM product_suppliers WHERE product_supplier_id = ?";
+            $Stmt = $this->Conn->prepare($Sql);
+            if (!$Stmt) {
+                throw new Exception('Failed to prepare DELETE statement: ' . $this->Conn->error);
+            }
+            $Stmt->bind_param("i", $ProductSupplierId);
+
+            if (!$Stmt->execute()) {
+                throw new Exception('Failed to execute DELETE statement: ' . $Stmt->error);
+            }
+            // Check if a row was actually deleted
+            $IsDeleted = $Stmt->affected_rows > 0;
+            return [
+                'success' => $IsDeleted,
+                'message' => $IsDeleted ? 'Product successfully removed from supplier.' : 'No Product has been deleted.'
+            ];
+        } catch (Exception $E) {
+            return [
+                'success' => false,
+                'message' => $E->getMessage()
+            ];
+        }
     }
     public function getSupplierProducts(int $SupplierId) {
         try {
