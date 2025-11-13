@@ -59,7 +59,7 @@
             $LoginPage = 'index.php';
             $IsLoggedIn = self::has('logged_in') && self::get('logged_in') === true;
             $Role = self::get('role') ?? null;
-
+            $AdminPages = ['reports.php', 'supplier.php'];
             // Redirect to login page since there are no active users or sessions yet
             if (!$IsLoggedIn || !$Role) {
                 if ($CurrentPage !== $LoginPage) {
@@ -69,8 +69,20 @@
             }
 
             // Redirect to default pages according to role if there is a session or an active user
-            $PageToDirect = ($Role === 'admin') ? 'reports.php' : 'transaction.php';
+            $DefaultPages = [
+                'admin' => 'reports.php',
+                'cashier' => 'transaction.php',
+            ];
+
+            $PageToDirect = $DefaultPages[$Role] ?? 'index.php';
+
             if ($IsLoggedIn && $CurrentPage === $LoginPage) {
+                header("Location: /nixar-pos/public/{$PageToDirect}");
+                exit;
+            }
+
+            // Cashier is redirected to its main page when it attemps to access admin pages
+            if ($Role === 'cashier' && in_array($CurrentPage, $AdminPages)) {
                 header("Location: /nixar-pos/public/{$PageToDirect}");
                 exit;
             }
