@@ -112,14 +112,15 @@ const populateMetrics = (data) => {
       return;
     }
 
-    for (const [key, metric_reference] of Object.entries(reference)) {
-      const value = metricData[key] ?? 'No data';
-      metric_reference.innerText = value !== 'No data' ? `${prefix[key] || ''}${value}${suffix[key] || ''}` : value;
-    }
+    Object.entries(reference).forEach(([key, ref]) => {
+      const value = metricData[key];
+      const isNumeric = !isNaN(value) && value && value !== '';
+      ref.innerText = !value ? 'No data found.' : `${prefix[key] ?? ''}${isNumeric ? Number(value).toLocaleString() : value}${suffix[key] ?? ''}`;
+    })
   });
 };
 
-const sales_inventory_metrics = async () => {
+const fetchSalesInventoryMetrics = async () => {
   try {
     const response = await fetch('handlers/fetch_inventory_sales_metrics.php');
     const data = await response.json();
@@ -145,7 +146,7 @@ const renderTable = (tableElement, data, keys) => {
   tableElement.innerHTML = generateTableRows(data, keys);
 };
 
-const sales_inventory_list_metrics = async () => {
+const fetchSalesInventoryListMetrics = async () => {
   try {
     const response = await fetch('handlers/fetch_inventory_sales_list_metrics.php');
     const data = await response.json();
@@ -173,6 +174,6 @@ const sales_inventory_list_metrics = async () => {
 };
 
 document.addEventListener('DOMContentLoaded', () =>{
-    sales_inventory_metrics();
-    sales_inventory_list_metrics();
+    fetchSalesInventoryMetrics();
+    fetchSalesInventoryListMetrics();
 });
