@@ -25,6 +25,7 @@ const fetchSuppliers = async (page = 1) => {
         renderRows(data.suppliers);
         updatePagination(data.totalPages, data.currentPage)
     } catch (err) {
+        showToast(err.message, 'error');
         console.error(err.message);
     }
 }
@@ -77,6 +78,7 @@ const fetchSupplierProducts = async (supplierId) => {
         console.log('Products for supplier:', supplierId, data);
         populateSupplierProductForms(data.supplier_products);
     } catch (error) {
+        showToast(error.message, 'error');
         console.error(error.message);
     }
 }
@@ -159,9 +161,10 @@ const handleUpdateSupplier = async (inputs, viewBtn, editBtn) => {
         const result = await response.json();
         if (!result.success) throw new Error(result.message);
 
-        alert(result.message);
+        showToast(result.message);
         resetButtons(editBtn, viewBtn, supplierId);
     } catch (error) {
+        showToast(error.message, 'error');
         console.error(error.message);
     }
     
@@ -248,12 +251,12 @@ const handleDelete = async (button) => {
             modalInstance.hide();
         }
 
-        if (currentSupplierId) {
-            fetchSupplierProducts(currentSupplierId);
-        }
+        if (currentSupplierId) fetchSupplierProducts(currentSupplierId);
+        await fetchSuppliers();
 
         alert(data.message);
     } catch (error) {
+        showToast(error.message, 'error');
         console.error(error.message);
     }
 }
@@ -272,7 +275,9 @@ const updateBasePrice = async (id, updatedPrice) => {
         if (currentSupplierId) {
             fetchSupplierProducts(currentSupplierId);
         }
+        showToast(data.message, 'info');
     } catch (error) {
+        showToast(error.message, 'error');
         console.error(error.message);
     }
 }

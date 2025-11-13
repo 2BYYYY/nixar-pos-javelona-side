@@ -1,4 +1,7 @@
 <?php 
+    /* Author: John Roland Octavio
+    *  Fetches paginated supplier data and returns it as a JSON response.
+    */
     header("Content-Type: application/json");
 
     include_once __DIR__ . '/../../includes/config/_init.php';  

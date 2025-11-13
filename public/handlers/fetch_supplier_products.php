@@ -1,6 +1,6 @@
 
 <?php 
-    /*
+    /* Author: John Roland Octavio
     * fetch_supplier_products.php
     * 
     * This handler retrieves all products supplied by a specific supplier.

@@ -1,4 +1,8 @@
 <?php 
+    /* Author: John Roland Octavio
+    *  fetch_invetory.php 
+    *  Fetches paginated inventory data, appends image URLs, and returns JSON response.
+    */
     header("Content-Type: application/json");
 
     include_once __DIR__ . '/../../includes/config/_init.php';  

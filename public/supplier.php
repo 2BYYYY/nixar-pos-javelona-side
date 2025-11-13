@@ -1,3 +1,4 @@
+<!-- Author: John Roland L. Octavio -->
 <?php 
 include_once __DIR__ . '/../includes/config/_init.php'; 
   $Role = ucwords(strtolower(SessionManager::get('role')));
@@ -37,6 +38,7 @@ include_once __DIR__ . '/../includes/config/_init.php';
  </div>
 
 <?php include_once '../includes/components/supplier-products-modal.php'; ?>
+<?php include_once '../includes/components/toast-container.php'; ?>
 <!-- =============== SUPPLIER PAGE SPECIFIC SCRIPT =============== -->
 <script src="assets/js/supplier.js?v=<?=filemtime('assets/js/supplier.js')?>"></script>
 <?php include_once '../includes/footer.php'; ?>

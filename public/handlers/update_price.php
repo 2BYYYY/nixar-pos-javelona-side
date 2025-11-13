@@ -1,4 +1,9 @@
 <?php 
+    /* Author: John Roland Octavio
+    * Updates the base price of a product for a given supplier.
+    * Expects POST parameters: `base_price` and `product_supplier_id`.
+    */
+
     header("Content-Type: application/json");
     include_once __DIR__ . '/../../includes/config/_init.php';  
     SessionManager::checkSession();

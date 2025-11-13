@@ -2,6 +2,7 @@
 * AUTHOR/S:
 * - Raean Chrissean Tamayo
 * - Jul Leo Javellana
+* - John Roland Octavio (Toast Logic)
 * */
 
 const toggleMenu = () => {
@@ -31,3 +32,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+
+const showToast = (message, type = "info") => {
+  const container = document.getElementById('toast-container');
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type} px-2 py-1 d-flex justify-content-between align-items-center fs-6`;
+  toast.innerHTML = `
+      <span class="flex-grow-1 text-wrap">${message}</span>
+      <button>&times;</button>
+  `;
+  container.appendChild(toast);
+  
+  // Trigger show animation
+  setTimeout(() => toast.classList.add('show'), 50);
+
+  // Remove after 3s
+  // const timeoutId = setTimeout(() => hideToast(toast), 2000);
+
+  // Handle manual close
+  toast.querySelector('button').addEventListener('click', () => {
+      clearTimeout(timeoutId);
+      hideToast(toast);
+  });
+} 
+
+const hideToast = (toast) => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+}

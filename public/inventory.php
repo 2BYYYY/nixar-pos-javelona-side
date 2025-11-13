@@ -161,7 +161,7 @@
   <?php $mode='add'; include_once '../includes/components/product-modal.php'; ?>
   <?php $mode = 'edit'; include  '../includes/components/product-modal.php'; ?>
   <?php include_once '../includes/components/delete-product-modal.php'; ?>
-
+  <?php include_once '../includes/components/toast-container.php'; ?>
 <!-- =============== INVENTORY PAGE SPECIFIC SCRIPT =============== -->
 <script src="assets/js/inventory.js?v=<?=filemtime('assets/js/inventory.js')?>"></script>
 <?php include_once '../includes/footer.php'; ?>

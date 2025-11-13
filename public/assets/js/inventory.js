@@ -1,4 +1,4 @@
-// AUTHORS: Raean Chrissean R. Tamayo,
+// AUTHORS: Raean Chrissean R. Tamayo, John Roland Octavio
 /* ================= INVENTORY REFERENCES AND VARIABLES ================= */
 const searchBox = document.getElementById('search-input');
 const inventoryTbl = document.getElementById('container-inventory-data');
@@ -48,11 +48,9 @@ const searchProducts = (page = 1) => {
       updatePagination(data.totalPages, data.currentPage);
       queryString = "";
     })
-    .catch(err => {
+    .catch (err => {
+      showToast(err.message);
       console.error(err);
-      inventoryTbl.innerHTML = `
-                <tr><td colspan="7" style="text-align:center;">${ err.message }</td></tr>
-            `;
     });
 }
 
@@ -280,11 +278,9 @@ const searchByFilters = async (page = 1) => {
 
     renderRows(filtered.inventory);
     updatePagination(filtered.totalPages, filtered.currentPage);
-  } catch(err) {
-    console.error(err);
-    inventoryTbl.innerHTML = `
-            <tr><td colspan="7" style="text-align:center;">${ err.message }</td></tr>
-        `;
+  } catch (err) {
+    showToast(err.message, 'error');
+    console.error(err.message)
   }
 }
 
@@ -509,8 +505,8 @@ const fetchAndDisplayCompatibleCars = async (sku) => {
       container.innerHTML = '<p class="text-center p-3">No compatible cars are listed for this product.</p>';
     }
   } catch (error) {
+    showToast(error.message, 'error');
     console.error('Error fetching compatible cars:', error);
-    container.innerHTML = `<p class="text-danger text-center p-3">Error: ${error.message}</p>`;
   }
 };
 
@@ -553,7 +549,9 @@ const handleDeleteProduct = () => {
       else fetchInventory(currentPage);
 
       if(modal) modal.hide();
+      showToast(result.message, 'info');
     } catch (err) {
+      showToast(err.message, 'error');
       console.error(err);
     }
   })
@@ -597,8 +595,10 @@ const handleProductForm = (form) => {
       } else if (form.id === 'editProductForm') {
         resetStepForm('edit');
       }
-
+      
+      showToast(result.message, 'info');
     } catch (err) {
+      showToast(err.message, 'error');
       console.error(err.message);
     }
   })

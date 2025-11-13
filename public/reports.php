@@ -2,7 +2,7 @@
   include_once __DIR__ . '/../includes/config/_init.php';  
   $PageTitle = "Reports | NIXAR POS";
   $CssPath = "assets/css/styles.css";
-  $JSPath = "assets/js/reports.js";
+  $JSPath = "assets/js/scripts.js";
 
   include_once '../includes/head.php'; 
   SessionManager::checkSession();
@@ -187,4 +187,7 @@
     </div>
 </div>
 
-<?php include_once("../includes/footer.php"); ?>
+<?php include_once '../includes/components/toast-container.php'; ?>
+<!-- =============== REPORTS PAGE SPECIFIC SCRIPT =============== -->
+<script src="assets/js/reports.js?v=<?=filemtime('assets/js/reports.js')?>"></script>
+<?php include_once "../includes/footer.php" ?>
