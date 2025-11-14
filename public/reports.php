@@ -1,4 +1,4 @@
-<!-- AUTHORS: Jared Ramon Elizan -->
+<!-- AUTHORS: Jared Ramon Elizan --> 
 <?php 
   include_once __DIR__ . '/../includes/config/_init.php';  
   $PageTitle = "Reports | NIXAR POS";
