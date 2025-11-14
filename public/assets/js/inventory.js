@@ -49,7 +49,7 @@ const searchProducts = (page = 1) => {
       queryString = "";
     })
     .catch (err => {
-      showToast(err.message);
+      showToast(err.message, "error");
       console.error(err);
     });
 }
@@ -171,7 +171,7 @@ const fillDeleteModal = (data) => {
 /* ================= INVENTORY PAGINATION FUNCTIONS ================= */
 const fetchInventory = async (page = 1) => {
   try {
-    const response = await fetch(`handlers/fetch_inventory.php?limit=${ LIMIT }&page=${ page }`)
+    const response = await fetch(`handler/fetch_inventory.php?limit=${ LIMIT }&page=${ page }`)
     const data = await response.json();
 
     if(data.inventory.length === 0) {
@@ -186,7 +186,8 @@ const fetchInventory = async (page = 1) => {
     renderRows(data.inventory);
     updatePagination(data.totalPages, data.currentPage)
   } catch (err) {
-    console.error(err.message);
+      showToast(err.message, 'error');
+      console.error(err.message);
   }
 }
 
