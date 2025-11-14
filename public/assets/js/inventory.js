@@ -184,7 +184,7 @@ const fetchInventory = async (page = 1) => {
     currentPage = data.currentPage;
     console.log(data);
     renderRows(data.inventory);
-    updatePagination(data.totalPages, data.currentPage)
+    updatePagination(data.totalPages, data.currentPage);
   } catch (err) {
       showToast("Failed to load inventory data", err.message, 'error');
       console.error(err.message);

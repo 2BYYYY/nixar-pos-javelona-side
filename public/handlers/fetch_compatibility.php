@@ -12,11 +12,11 @@
         exit;
     }
 
-    $sku = trim($_GET['sku']);
+    $Sku = InputValidator::sanitizeData($_GET['sku']);
     $Product = new NixarProduct($Conn);
-    $fetchResult = $Product->fetchCompatible($sku);
+    $FetchResult = $Product->fetchCompatible($Sku);
 
-    if ($fetchResult === false) {
+    if (!$FetchResult) {
         echo json_encode(['success' => false, 'message' => 'Error fetching data.']);
         exit;
     }
