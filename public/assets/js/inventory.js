@@ -474,16 +474,16 @@ const fetchAndDisplayCompatibleCars = async (sku) => {
   container.innerHTML = '<p>Loading compatible cars...</p>'; // Show loading state
 
   try {
-    const response = await fetch(`${window.location.origin}/nixar-pos/public/handlers/fetch_compatibility.php?sku=${encodeURIComponent(sku)}`);
+    const response = await fetch(`handlers/fetch_compatibility.php?sku=${encodeURIComponent(sku)}`);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const result = await response.json();
     console.log('Compatible cars data:', result);
 
-    if (result.success && result.data && result.data.rows.length > 0) {
+    if (result.success && result.rows.length > 0) {
       // Build inputs for each compatible car
       container.innerHTML = ''; // clear loading text
-      result.data.rows.forEach(car => {
+      result.rows.forEach(car => {
         const newInput = document.createElement('div');
         newInput.className = 'd-flex align-items-stretch gap-2 mb-2 car-model-input';
 
