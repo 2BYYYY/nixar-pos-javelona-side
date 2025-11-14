@@ -1,3 +1,4 @@
+<!-- AUTHOR: John Roland Octavio -->
 <?php
   include_once __DIR__ . '/../includes/config/_init.php';  
   $Role = ucwords(strtolower(SessionManager::get('role')));
