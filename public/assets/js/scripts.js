@@ -34,10 +34,28 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-const showToast = (message, type = "info") => {
+const showToast = (header, message, type = "info") => {
     const container = document.getElementById('toast-container');
-
     const toast = document.createElement('div');
+
+    const toastMessageContainer = document.createElement('div');
+    toastMessageContainer.className = "flex-grow-1 d-flex flex-column bg-transparent";
+
+    const toastHeader = document.createElement('h6');
+    toastHeader.style.fontSize = '14px';
+    toastHeader.style.color = 'black';
+    toastHeader.textContent = header;
+    toastMessageContainer.appendChild(toastHeader);
+
+    const toastMessage = document.createElement('span');
+    toastMessage.style.fontSize = '12px';
+    toastMessage.textContent = message;
+    toastMessageContainer.appendChild(toastMessage);
+
+    const toastButton = document.createElement('button');
+    toastButton.className = "rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center ms-2";
+    toastButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+
     const icon =
         type === 'success'
             ? "fa-solid fa-check"
@@ -52,11 +70,10 @@ const showToast = (message, type = "info") => {
         >
             <i class="${icon} text-white fs-6"></i>
         </div>
-        <span class="flex-grow-1 text-wrap">${message}</span>
-        <button class="rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center ms-2">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
   `;
+
+    toast.appendChild(toastMessageContainer);
+    toast.appendChild(toastButton);
     container.appendChild(toast);
 
     // Trigger show animation

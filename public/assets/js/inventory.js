@@ -49,8 +49,8 @@ const searchProducts = (page = 1) => {
       queryString = "";
     })
     .catch (err => {
-      showToast(err.message, "error");
-      console.error(err);
+      showToast("Failed to search for products", err.message,"error");
+      console.error(err.message);
     });
 }
 
@@ -171,7 +171,7 @@ const fillDeleteModal = (data) => {
 /* ================= INVENTORY PAGINATION FUNCTIONS ================= */
 const fetchInventory = async (page = 1) => {
   try {
-    const response = await fetch(`handler/fetch_inventory.php?limit=${ LIMIT }&page=${ page }`)
+    const response = await fetch(`handlers/fetch_inventory.php?limit=${ LIMIT }&page=${ page }`)
     const data = await response.json();
 
     if(data.inventory.length === 0) {
@@ -186,7 +186,7 @@ const fetchInventory = async (page = 1) => {
     renderRows(data.inventory);
     updatePagination(data.totalPages, data.currentPage)
   } catch (err) {
-      showToast(err.message, 'error');
+      showToast("Failed to load inventory data", err.message, 'error');
       console.error(err.message);
   }
 }
@@ -280,7 +280,7 @@ const searchByFilters = async (page = 1) => {
     renderRows(filtered.inventory);
     updatePagination(filtered.totalPages, filtered.currentPage);
   } catch (err) {
-    showToast(err.message, 'error');
+    showToast("Failed to filter products", err.message, 'error');
     console.error(err.message)
   }
 }
@@ -506,7 +506,7 @@ const fetchAndDisplayCompatibleCars = async (sku) => {
       container.innerHTML = '<p class="text-center p-3">No compatible cars are listed for this product.</p>';
     }
   } catch (error) {
-    showToast(error.message, 'error');
+    showToast("Failed to load compatible car model", error.message, 'error');
     console.error('Error fetching compatible cars:', error);
   }
 };
@@ -550,9 +550,9 @@ const handleDeleteProduct = () => {
       else fetchInventory(currentPage);
 
       if(modal) modal.hide();
-      showToast(result.message, 'info');
+      showToast("Product deleted successfully", result.message, 'info');
     } catch (err) {
-      showToast(err.message, 'error');
+      showToast("Failed to delete product", err.message, 'error');
       console.error(err);
     }
   })
@@ -597,9 +597,9 @@ const handleProductForm = (form) => {
         resetStepForm('edit');
       }
       
-      showToast(result.message, 'info');
+      showToast("Product saved successfully", result.message, 'info');
     } catch (err) {
-      showToast(err.message, 'error');
+      showToast("Failed to save product", err.message, 'error');
       console.error(err.message);
     }
   })

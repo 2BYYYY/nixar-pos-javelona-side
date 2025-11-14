@@ -25,7 +25,7 @@ const fetchSuppliers = async (page = 1) => {
         renderRows(data.suppliers);
         updatePagination(data.totalPages, data.currentPage)
     } catch (err) {
-        showToast(err.message, 'error');
+        showToast("Failed to load supplier list", err.message, 'error');
         console.error(err.message);
     }
 }
@@ -78,7 +78,7 @@ const fetchSupplierProducts = async (supplierId) => {
         console.log('Products for supplier:', supplierId, data);
         populateSupplierProductForms(data.supplier_products);
     } catch (error) {
-        showToast(error.message, 'error');
+        showToast("Failed to load products for this supplier", error.message, 'error');
         console.error(error.message);
     }
 }
@@ -161,10 +161,10 @@ const handleUpdateSupplier = async (inputs, viewBtn, editBtn) => {
         const result = await response.json();
         if (!result.success) throw new Error(result.message);
 
-        showToast(result.message);
+        showToast("Supplier details updated successfully", result.message);
         resetButtons(editBtn, viewBtn, supplierId);
     } catch (error) {
-        showToast(error.message, 'error');
+        showToast("Failed to update supplier details", error.message, 'error');
         console.error(error.message);
     }
     
@@ -256,7 +256,7 @@ const handleDelete = async (button) => {
 
         alert(data.message);
     } catch (error) {
-        showToast(error.message, 'error');
+        showToast("Failed to delete product from supplier list", error.message, 'error');
         console.error(error.message);
     }
 }
@@ -275,9 +275,9 @@ const updateBasePrice = async (id, updatedPrice) => {
         if (currentSupplierId) {
             fetchSupplierProducts(currentSupplierId);
         }
-        showToast(data.message, 'info');
+        showToast("Base price updates successfully", data.message, 'info');
     } catch (error) {
-        showToast(error.message, 'error');
+        showToast("Failed to update base price", error.message, 'error');
         console.error(error.message);
     }
 }

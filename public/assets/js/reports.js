@@ -129,7 +129,7 @@ const fetchSalesInventoryMetrics = async () => {
 
     console.log(data); 
   } catch (err) {
-    showToast(err.message, 'error');
+    showToast("Failed to load key metrics", err.message, 'error');
     console.error(err.message);
   }
 };
@@ -167,7 +167,7 @@ const fetchSalesInventoryListMetrics = async () => {
     });
 
   } catch (err) {
-    showToast(err.message, 'error');
+    showToast("Failed to load detailed reports", err.message, 'error');
     console.error(err);
     list_metric_config.forEach(({ table, value }) => {
       table.innerHTML = `<tr><td colspan="${value.length}" style="text-align:center;">Error loading data</td></tr>`;
