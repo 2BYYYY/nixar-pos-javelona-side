@@ -567,3 +567,19 @@ td .btn {
 .toast.info > div {
     background-color: #17a2b8;
 }
+
+.toast.success { background-color: #28a745; }
+.toast.error { background-color: #dc3545; }
+.toast.info { background-color: #17a2b8; }
+
+.report-header-info {
+    font-size: 10px;
+}
+
+.report-table-header {
+    font-size: 12px;
+}
+
+.report-table-items {
+    font-size: 10px;
+}

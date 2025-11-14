@@ -1,4 +1,5 @@
-<?php 
+<!-- AUTHORS: Jared Ramon Elizan --> 
+<?php  
   include_once __DIR__ . '/../includes/config/_init.php';  
   $PageTitle = "Reports | NIXAR POS";
   $CssPath = "assets/css/styles.css";
@@ -24,7 +25,7 @@
                 <input type="date" id="startDate" class="text-input" style="width: 150px;">
                 <span>to</span>
                 <input type="date" id="endDate" class="text-input" style="width: 150px;">
-                <button class="btn ms-2">Generate Report</button>
+                <button class="btn ms-2" onclick="handleGenerateReport()">Generate Report</button>
             </div>
         </div>
     </div>

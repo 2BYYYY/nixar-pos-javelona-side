@@ -1,6 +1,7 @@
 <!--
-    AUTHOR/s:
+    AUTHOR/s: 
     - Jul Leo Javellana
+    - Jared Ramon Elizan
 -->
 
 <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
