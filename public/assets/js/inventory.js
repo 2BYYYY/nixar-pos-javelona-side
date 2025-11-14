@@ -49,7 +49,7 @@ const searchProducts = (page = 1) => {
       queryString = "";
     })
     .catch (err => {
-      showToast(err.message);
+      showToast(err.message, 'danger');
       console.error(err);
     });
 }
@@ -184,8 +184,9 @@ const fetchInventory = async (page = 1) => {
     currentPage = data.currentPage;
     console.log(data);
     renderRows(data.inventory);
-    updatePagination(data.totalPages, data.currentPage)
+    updatePagination(data.totalPages, data.currentPage);
   } catch (err) {
+    showToast(err.message, 'danger');
     console.error(err.message);
   }
 }

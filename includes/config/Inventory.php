@@ -90,30 +90,34 @@
             }
         } 
         public function fetchInventory(?int $Limit = null, int $Offset = 0): array {
-            $Sql = "SELECT * FROM product_inventory_view ORDER BY current_stock DESC, product_name ASC";
-            if ($Limit !== null) {
-                $Sql .= " LIMIT ? OFFSET ?";
-                $Stmt = $this->Conn->prepare($Sql);
-                if(!$Stmt) {
-                    throw new Exception("Failed to execute query: ". $this->Conn->error);
+            try {
+                $Sql = "SELECT * FROM product_inventory_view ORDER BY current_stock DESC, product_name ASC";
+                if ($Limit !== null) {
+                    $Sql .= " LIMIT ? OFFSET ?";
+                    $Stmt = $this->Conn->prepare($Sql);
+                    if(!$Stmt) {
+                        throw new Exception("Failed to execute query: ". $this->Conn->error);
+                    }
+                    $Stmt->bind_param("ii", $Limit, $Offset);
+                } else {
+                    $Stmt = $this->Conn->prepare($Sql);
+                    if(!$Stmt) {
+                        throw new Exception("Failed to execute query: ". $this->Conn->error);
+                    }
                 }
-                $Stmt->bind_param("ii", $Limit, $Offset);
-            } else {
-                $Stmt = $this->Conn->prepare($Sql);
-                if(!$Stmt) {
-                    throw new Exception("Failed to execute query: ". $this->Conn->error);
-                }
+
+                $Stmt->execute();
+                $Result = $Stmt->get_result();
+                // Fetch all inventory data as an associative array
+                $Rows = $Result->fetch_all(MYSQLI_ASSOC);
+                // Free memory resources and return rows
+                $Result->free();
+                $Stmt->close();
+
+                return ['success' => true, 'data' => $Rows];
+            } catch (Exception $E) {
+                return ['success' => false, 'message' => $E->getMessage()];
             }
-
-            $Stmt->execute();
-            $Result = $Stmt->get_result();
-            // Fetch all inventory data as an associative array
-            $Rows = $Result->fetch_all(MYSQLI_ASSOC);
-            // Free memory resources and return rows
-            $Result->free();
-            $Stmt->close();
-
-            return $Rows;
         }
 
         public function searchInventoryByKeyword(string $Query, int $Limit, int $Offset) {
