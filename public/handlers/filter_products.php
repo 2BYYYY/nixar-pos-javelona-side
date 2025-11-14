@@ -45,7 +45,7 @@
         }
     };
 
-    if(isset($Filters['max_range']) && $PriceRange > 0) {
+    if(isset($Filters['max_range']) && $Filters['max_range'] > 0) {
         $BaseSql .= " AND final_price <= ?";
         $Params[] = (float)$Filters['max_range'];
         $Types .= 'd';
