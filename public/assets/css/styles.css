@@ -537,3 +537,54 @@ td .btn {
 .toast.success { background-color: #28a745; }
 .toast.error { background-color: #dc3545; }
 .toast.info { background-color: #17a2b8; }
+
+.report-header-info {
+    font-size: 10px;
+}
+
+.report-table-header {
+    font-size: 12px;
+}
+
+.report-table-items {
+    font-size: 10px;
+}
+
+/* ENSURE TEMPLATE IS CLEAR AND FITS THE PRINT VIEW*/
+@media print {
+
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    #report-preview .w-50 {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .table-responsive {
+        display: block !important;
+        overflow: visible !important;
+        width: 100%;
+    }
+    
+    table, th, td {
+        font-size: 12px;
+        padding: 4px;
+    }
+
+    /* Allow sections to start on a new page */
+    .report-section {
+        page-break-before: always;
+        break-before: page;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+}

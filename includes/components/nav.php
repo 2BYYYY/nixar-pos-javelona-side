@@ -4,9 +4,9 @@
 -->
 <nav class="navbar w-100 d-flex justify-content-between align-items-center rounded-3 px-4">
     <img
-            src="assets/svg/nixar-logo-white.svg"
-            alt="nixar-logo-white"
-            width="150px"
+        src="assets/svg/nixar-logo-white.svg"
+        alt="nixar-logo-white"
+        width="150px"
     />
 
     <!--desktop menu-->

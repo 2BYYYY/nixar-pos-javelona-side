@@ -175,6 +175,33 @@ const fetchSalesInventoryListMetrics = async () => {
   }
 };
 
+/* ================= GENERATE REPORT REFERENCES ================= */
+const handleGenerateReport = async () => {
+  const start = document.getElementById('startDate').value.trim();
+  const end = document.getElementById('endDate').value.trim();
+
+  console.log(`start: ${start}, end: ${end}`)
+  try {
+    const response = await fetch(`handlers/handle_generate_report.php?start=${start}&end=${end}`);
+    const data = await response.json();
+
+    if(!data.success) {
+      throw new Error(data.message);
+    }
+
+    // Save data in sessionStorage - temporary only until tab is closed
+    sessionStorage.setItem('reportData', JSON.stringify(data));
+    console.log('reportData in reports: ' + JSON.stringify(data))
+    sessionStorage.setItem('reportPeriod', JSON.stringify({'start': start, 'end': end }));
+    // redirect to 'report-preview.php' for reporting data preview
+    window.location.href = 'report-preview.php';
+    console.log(data);
+
+  } catch (error) {
+    showToast(error.message, 'error');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () =>{
     fetchSalesInventoryMetrics();
     fetchSalesInventoryListMetrics();

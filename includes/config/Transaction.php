@@ -118,11 +118,12 @@
                     'transactions' => $Rows
                 ];
             } catch (Exception $E) {
-                    return [
-                        'status' => false,
-                        'message' => $E->getMessage()
-                    ];
-                }
+                error_log("Transaction Error: {$E->getMessage()}");
+                return [
+                    'status' => false,
+                    'message' => $E->getMessage()
+                ];
             }
+        }
     }
 ?>

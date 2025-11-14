@@ -24,7 +24,7 @@
                 <input type="date" id="startDate" class="text-input" style="width: 150px;">
                 <span>to</span>
                 <input type="date" id="endDate" class="text-input" style="width: 150px;">
-                <button class="btn ms-2">Generate Report</button>
+                <button class="btn ms-2" onclick="handleGenerateReport()">Generate Report</button>
             </div>
         </div>
     </div>
